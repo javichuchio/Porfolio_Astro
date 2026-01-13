@@ -1,0 +1,21 @@
+---
+import MiLayout from "../layouts/MiLayout.astro"
+import technologies from "../data/technologies.json"
+import Technology from "../components/Technology.astro";
+import Button from "../components/Button.astro";
+const calificativo = 'dominadas';
+---
+
+<MiLayout>
+    <h1>Tecnologías {calificativo}:</h1>
+    <ul>
+        {technologies.map(technology =>
+            <Technology 
+            title={technology.title} 
+            description={technology.description} 
+            />
+        )}
+    </ul>
+
+    <Button href="/">Volver</Button>
+</MiLayout>

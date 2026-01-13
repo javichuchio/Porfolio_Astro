@@ -1,0 +1,14 @@
+.btn {
+    background-color: aquamarine;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: cadetblue;
+    color: white;
+}

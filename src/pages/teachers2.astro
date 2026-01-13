@@ -1,0 +1,21 @@
+---
+import MiLayout from "../layouts/MiLayout.astro";
+const calificativo = 'favoritos';
+---
+
+<MiLayout>
+    <h1>Lista de profesores {calificativo}:</h1>
+    <ul id="teachers">
+
+    </ul>
+</MiLayout>
+
+<script>
+    const teachers = ['Angel', 'Pepe', 'Marta', 'Antonio'];
+    const $ul = document.getElementById('teachers')
+    teachers.forEach(teacher => {
+        const $li = document.createElement('li')
+        $li.textContent = teacher
+        $ul?.appendChild($li)
+    })
+</script>

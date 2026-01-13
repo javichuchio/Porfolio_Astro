@@ -1,0 +1,14 @@
+---
+import MiLayout from "../layouts/MiLayout.astro"
+
+const calificativo = 'favoritos';
+const teachers = ['Angel', 'Pepe', 'Marta', 'Antonio'];
+---
+<MiLayout title="Profesores">
+<h1>Lista de profesores {calificativo}:</h1>
+<ul>
+    {teachers.map(teacher => 
+        <li>{teacher}</li>
+    )}
+</ul>
+</MiLayout>

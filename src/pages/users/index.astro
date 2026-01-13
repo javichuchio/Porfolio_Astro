@@ -1,0 +1,126 @@
+---
+
+//SSG (STATIC) --> no necesita servidor
+//CSR (CLIENT SIDE RENDERING) --> no necesita servidor
+//SSR (SERVER SIDE RENDERING) ---> necesita un servidor nodejs
+// los nuevos cambios en jsonplaceholder se actualizan
+// cada vez que alguien entra hace una llamada al jsonplaceholder
+// hemos configurado astro.config.mjs para que el proyecto sea ssr
+
+
+import MiLayout from "../../layouts/MiLayout.astro";
+---
+<MiLayout title="Users">
+  <h1>Users</h1>
+  <button id="load-users">Dale cañita</button>
+  <div id="users-container" aria-live="polite" style="margin-top: 1rem;"></div>
+</MiLayout>
+
+<script type="module">
+  const btn = document.getElementById('load-users');
+  const usersContainer = document.getElementById('users-container');
+
+  const URL = 'https://jsonplaceholder.typicode.com/users';
+
+  btn.addEventListener('click', async () => {
+    usersContainer.textContent = '';
+
+    try {
+      const res = await fetch(URL);
+      const users = await res.json();
+
+      for (const user of users) {
+        usersContainer.innerHTML += `
+          <strong>${user.name}</strong>
+          <ul>
+            <li>Id: ${user.id}</li>
+            <li>Email: ${user.email}</li>
+            <li>Telf: ${user.phone}</li>
+            <li>Direccion:</li>
+            <ul>
+              <li>Calle: ${user.address.street}</li>
+              <li>Ciudad: ${user.address.city}</li>
+              <li>Zipcode: ${user.address.zipcode}</li>
+            </ul>
+          </ul>
+        `;
+      }
+    } catch (err) {
+      console.error(err);
+      usersContainer.textContent = 'Fallito.';
+    }
+  });
+  
+</script>
+<style>
+  :global(body) {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+
+  h1 {
+    margin: 0 0 1rem 0;
+  }
+
+  #load-users {
+    padding: 0.6rem 1rem;
+    background: #0d6efd;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background 0.2s ease, transform 0.05s ease;
+  }
+
+  #load-users:hover:not([disabled]) {
+    background: #0b5ed7;
+  }
+
+  #load-users:active:not([disabled]) {
+    transform: translateY(1px);
+  }
+
+  #load-users[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  #users-container {
+    margin-top: 1rem;
+  }
+
+  /* Grid of user cards */
+  #users-container  > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  #users-container > ul > li {
+    background: #fff;
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+
+  #users-container > ul > li > strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  /* Inner details list */
+  #users-container > ul > li > ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.25rem 0 0 0;
+    color: #333;
+  }
+
+  #users-container > ul > li > ul > li {
+    padding: 0.15rem 0;
+  }
+</style>

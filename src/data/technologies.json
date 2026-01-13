@@ -1,0 +1,6 @@
+[
+    {"title": "Html", "description": "Estructura de la web"},
+    {"title": "Css", "description": "Estilo de la web"},
+    {"title": "JavaScript", "description": "Interactividad de la web"},
+    {"title": "Astro", "description": "Framework de la web"}
+]
