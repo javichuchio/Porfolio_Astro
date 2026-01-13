@@ -8,5 +8,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  // output: 'server' // esto lo convierte en ssr
+   output: 'server' // esto lo convierte en ssr
+  //site: 'https://github.com/javichuchio/Porfolio_Astro.git',
+  //outDir: 'docs', // esto es para github pages
+  //base: '/Porfolio_Astro/' // esto es para github pages
 });

@@ -1,0 +1,80 @@
+---
+import MiLayout from "../../layouts/MiLayout.astro";
+const apiKey = import.meta.env.CAT_API_KEY;
+const response = await fetch("https://api.thecatapi.com/v1/images/search");
+const data = await response.json();
+const gato = data[0];
+
+---
+<MiLayout>
+<h1> Tu gato del dia</h1>
+
+<img 
+  src={gato.url} 
+  alt="Gato aleatorio" 
+  style="max-width: 400px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2);" 
+/>
+
+<p>Recarga la pagina para ver otro gato </p>
+</MiLayout>
+
+<style>
+ :root {
+  --primary-color: #ff6f61;
+  --secondary-color: #f9f9f9;
+  --text-color: #333;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+  --border-radius: 12px;
+  --transition-speed: 0.3s;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+}
+
+h1 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+p {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 1rem;
+  color: #555;
+}
+
+img {
+  display: block;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 20px var(--shadow-color);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  cursor: pointer;
+}
+
+img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px var(--shadow-color);
+}
+
+MiLayout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+</style>
+

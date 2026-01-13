@@ -1,0 +1,19 @@
+---
+
+import MiLayout from '../../layouts/MiLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+const posts : CollectionEntry<"posts"> []= await getCollection('posts');
+
+
+---
+
+<MiLayout title="Mi blog de tecnologia">
+    <h1>Blog de Tecnología</h1>
+    <ul>
+        {posts.map((post) => (
+            <li>
+                <a href="">{post.data.title}</a>
+            </li>
+        ))}
+    </ul>
+</MiLayout>

@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import MiLayout from "../../layouts/MiLayout.astro";
+
+const { slug } = Astro.params;
+const posts = await getCollection('posts');
+
+const post = posts.find((p) => p.slug === slug);
+if(!post) throw new Error("Post not found: ");
+const {Content}= await post.render();
+
+---
+
+<MiLayout>
+    <article>
+    <h1>{post?.data.title}</h1>
+    <p>{post?.data.date}</p>
+    <main>
+        <Content />
+    </main>
+    </article>
+    <a href="/blog">Volver al blog</a>
+</MiLayout>
